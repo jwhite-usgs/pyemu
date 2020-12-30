@@ -681,7 +681,7 @@ if __name__ == "__main__":
     # setattr_test()
     # run_array_pars()
     # from_flopy_zone_pars()
-    from_flopy_pp_test()
+    #from_flopy_pp_test()
     # from_flopy()
     # add_obs_test()
     #from_flopy_kl_test()
@@ -709,3 +709,4 @@ if __name__ == "__main__":
     # run_test()
     # rectify_pgroup_test()
     # sanity_check_test()
+    try_process_ins_test()

@@ -496,18 +496,22 @@ def try_process_ins_test():
     ins_file = os.path.join("utils", "BH.mt3d.processed.ins")
     i = pyemu.pst_utils.InstructionFile(ins_file)
     df2 = i.read_output_file(ins_file.replace(".ins",""))
+    df2.loc[df2.obsval>1.0e+10] = 1.0e+10
+    print(df2.loc["gwcn1191_1_03285.00",:])
+    
 
-
-
-    # df1 = pyemu.pst_utils._try_run_inschek(ins_file,ins_file.replace(".ins",""))
-    df1 = pd.read_csv(ins_file.replace(".ins", ".obf"), delim_whitespace=True, names=["obsnme", "obsval"], index_col=0)
-    # df1.index = df1.obsnme
+    df1 = pyemu.pst_utils._try_run_inschek(ins_file,ins_file.replace(".ins",""))
+    df1 = pd.read_csv(ins_file.replace(".ins", ".obf"), delim_whitespace=True, names=["obsnme", "obsval"])
+    df1.loc[df1.obsval>1.0e+10] = 1.0e+10
+    df1.index = df1.obsnme
     df1.loc[:, "obsnme"] = df1.index
     df1.index = df1.obsnme
     # df1 = df1.loc[df.obsnme,:]
     diff = df2.obsval - df1.obsval
     print(diff.max(), diff.min())
     print(diff.sum())
+    print(df1)
+    print(diff.sort_values())
     assert diff.sum() < 1.0e+10
 
 
